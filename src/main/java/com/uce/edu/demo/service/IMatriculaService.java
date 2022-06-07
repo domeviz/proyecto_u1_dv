@@ -4,11 +4,11 @@ import com.uce.edu.demo.modelo.Matricula;
 
 public interface IMatriculaService {
 
-	public void ingresar(Matricula mt);
+	public void ingresar(Matricula matricula);
 
-	public Matricula buscar(String a);
+	public Matricula buscar(String numero);
 	
-	public void actualizar(Matricula mt);
+	public void actualizar(Matricula matricula);
 
-	public void eliminar(String a);
+	public void eliminar(String numero);
 }

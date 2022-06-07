@@ -13,27 +13,27 @@ public class MateriaServiceImpl implements IMateriaService {
 	private IMateriaRepository materiaRepository;
 
 	@Override
-	public void ingresar(Materia m) {
+	public void ingresar(Materia materia) {
 		// TODO Auto-generated method stub
-		this.materiaRepository.insertar(m);
+		this.materiaRepository.insertar(materia);
 	}
 
 	@Override
-	public Materia buscar(String a) {
+	public Materia buscar(String nombre) {
 		// TODO Auto-generated method stub
-		return this.materiaRepository.buscar(a);
+		return this.materiaRepository.buscar(nombre);
 	}
 
 	@Override
-	public void actualizar(Materia m) {
+	public void actualizar(Materia materia) {
 		// TODO Auto-generated method stub
-		this.materiaRepository.actualizar(m);
+		this.materiaRepository.actualizar(materia);
 	}
 
 	@Override
-	public void eliminar(String a) {
+	public void eliminar(String nombre) {
 		// TODO Auto-generated method stub
-		this.materiaRepository.eliminar(a);
+		this.materiaRepository.eliminar(nombre);
 	}
 	
 

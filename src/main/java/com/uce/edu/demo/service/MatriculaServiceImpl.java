@@ -13,28 +13,28 @@ public class MatriculaServiceImpl implements IMatriculaService {
 	private IMatriculaRepository matRepository;
 
 	@Override
-	public void ingresar(Matricula mt) {
+	public void ingresar(Matricula matricula) {
 		// TODO Auto-generated method stub
-		this.matRepository.insertar(mt);
+		this.matRepository.insertar(matricula);
 		
 	}
 
 	@Override
-	public Matricula buscar(String a) {
+	public Matricula buscar(String numero) {
 		// TODO Auto-generated method stub
-		return this.buscar(a);
+		return this.matRepository.buscar(numero);
 	}
 
 	@Override
-	public void actualizar(Matricula mt) {
+	public void actualizar(Matricula matricula) {
 		// TODO Auto-generated method stub
-		this.matRepository.actualizar(mt);
+		this.matRepository.actualizar(matricula);
 	}
 
 	@Override
-	public void eliminar(String a) {
+	public void eliminar(String numero) {
 		// TODO Auto-generated method stub
-		this.matRepository.eliminar(a);
+		this.matRepository.eliminar(numero);
 	}
 	
 	

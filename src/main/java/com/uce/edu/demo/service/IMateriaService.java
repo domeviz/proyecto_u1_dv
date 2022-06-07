@@ -4,11 +4,11 @@ import com.uce.edu.demo.modelo.Materia;
 
 public interface IMateriaService {
 
-	public void ingresar(Materia m);
+	public void ingresar(Materia materia);
 
-	public Materia buscar(String a);
+	public Materia buscar(String nombre);
 	
-	public void actualizar(Materia m);
+	public void actualizar(Materia materia);
 
-	public void eliminar(String a);
+	public void eliminar(String nombre);
 }
