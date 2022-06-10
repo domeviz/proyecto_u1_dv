@@ -25,4 +25,16 @@ public class CuentaBancariaRepositoryImpl implements ICuentaBancariaRepository{
 		return cta;
 	}
 
+	@Override
+	public void insertar(CuentaBancaria c) {
+		// TODO Auto-generated method stub
+		System.out.println("Se ha insertado en la base de datos la cuenta: " + c);
+	}
+
+	@Override
+	public void eliminar(String numero) {
+		// TODO Auto-generated method stub
+		System.out.println("Se ha eliminado en la base de datos la cuenta con numero: " + numero);
+	}
+
 }

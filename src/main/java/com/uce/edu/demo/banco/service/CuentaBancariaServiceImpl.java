@@ -13,15 +13,27 @@ public class CuentaBancariaServiceImpl implements ICuentaBancariaService{
 	private ICuentaBancariaRepository bancariaRepository;
 	
 	@Override
-	public void actualizar(CuentaBancaria c) {
+	public void actualizarCuenta(CuentaBancaria c) {
 		// TODO Auto-generated method stub
 		this.bancariaRepository.actualizar(c);
 	}
 
 	@Override
-	public CuentaBancaria buscar(String numero) {
+	public CuentaBancaria buscarCuenta(String numero) {
 		// TODO Auto-generated method stub
 		return this.bancariaRepository.buscar(numero);
+	}
+
+	@Override
+	public void insertarCuenta(CuentaBancaria c) {
+		// TODO Auto-generated method stub
+		this.bancariaRepository.insertar(c);
+	}
+
+	@Override
+	public void borrarCuenta(String numero) {
+		// TODO Auto-generated method stub
+		this.bancariaRepository.eliminar(numero);
 	}
 
 }
