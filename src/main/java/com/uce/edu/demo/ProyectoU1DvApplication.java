@@ -2,33 +2,31 @@ package com.uce.edu.demo;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.banco.modelo.CuentaBancaria;
-import com.uce.edu.demo.banco.repository.IRetiroRepository;
-import com.uce.edu.demo.banco.service.ICuentaBancariaService;
-import com.uce.edu.demo.banco.service.IDepositoService;
-import com.uce.edu.demo.banco.service.IRetiroService;
-import com.uce.edu.demo.banco.service.ITransferenciaService;
+import com.uce.edu.demo.bodega.modelo.Inventario;
+import com.uce.edu.demo.bodega.modelo.Producto;
+import com.uce.edu.demo.bodega.service.IGestorInventarioService;
+import com.uce.edu.demo.bodega.service.IInventarioService;
+import com.uce.edu.demo.bodega.service.IProductoService;
 
 @SpringBootApplication
 public class ProyectoU1DvApplication implements CommandLineRunner {
 	
 	@Autowired
-	private ICuentaBancariaService iCuentaBancariaService;
+	private IProductoService iProductoService;
 	
 	@Autowired
-	private ITransferenciaService iTransferenciaService;
+	private IInventarioService iInventarioService;
 	
 	@Autowired
-	private IDepositoService depositoService;
-	
-	@Autowired
-	private IRetiroService iRetiroService;
+	private IGestorInventarioService iGestorInventarioService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU1DvApplication.class, args);
@@ -37,50 +35,72 @@ public class ProyectoU1DvApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		System.out.println("\n Cuenta Bancaria \n");
+		Producto p=new Producto();
+		p.setNombre("Coca Cola");
+		p.setCantidad(100);
+		p.setPrecioCompra(new BigDecimal(1));
+		p.setPrecioVenta(this.iGestorInventarioService.precioVenta(p));
+		p.setFechaIngreso(LocalDateTime.of(2022, 05, 01, 23, 03, 05));
 		
-		CuentaBancaria cb=new CuentaBancaria();
-		cb.setNumero("123");
-		cb.setSaldo(new BigDecimal(200));
+		this.iProductoService.insertarProducto(p);
 		
-		this.iCuentaBancariaService.insertarCuenta(cb);
+		Producto p2=new Producto();
+		p2.setNombre("Huevos");
+		p2.setCantidad(300);
+		p2.setPrecioCompra(new BigDecimal(3));
+		p2.setPrecioVenta(this.iGestorInventarioService.precioVenta(p2));
+		p2.setFechaIngreso(LocalDateTime.of(2022, 06, 01, 23, 03, 05));
 		
-		this.iCuentaBancariaService.buscarCuenta("123");
+		this.iProductoService.insertarProducto(p2);
 		
-		cb.setNumero("132");
-		this.iCuentaBancariaService.actualizarCuenta(cb);
+		Producto p3=new Producto();
+		p3.setNombre("Agua");
+		p3.setCantidad(400);
+		p3.setPrecioCompra(new BigDecimal(1));
+		p3.setPrecioVenta(this.iGestorInventarioService.precioVenta(p3));
+		p3.setFechaIngreso(LocalDateTime.of(2021, 02, 01, 12, 10, 23));
 		
-		this.iCuentaBancariaService.borrarCuenta("132");
+		this.iProductoService.insertarProducto(p3);
 		
-		System.out.println("\n Transferencia \n");
+		Producto p4=new Producto();
+		p4.setNombre("Jugo");
+		p4.setCantidad(120);
+		p4.setPrecioCompra(new BigDecimal(2));
+		p4.setPrecioVenta(this.iGestorInventarioService.precioVenta(p4));
+		p4.setFechaIngreso(LocalDateTime.of(2021, 05, 11, 12, 10, 11));
 		
-		this.iTransferenciaService.realizarTransferencia("12", "13", new BigDecimal(20));
+		this.iProductoService.insertarProducto(p4);
 		
-		this.iTransferenciaService.buscar("12");
+		Producto p5=new Producto();
+		p5.setNombre("Avena");
+		p5.setCantidad(80);
+		p5.setPrecioCompra(new BigDecimal(3));
+		p5.setPrecioVenta(this.iGestorInventarioService.precioVenta(p5));
+		p5.setFechaIngreso(LocalDateTime.of(2021, 07, 10, 12, 10, 15));
 		
-		this.iTransferenciaService.actualizar(LocalDateTime.of(2022, 2, 16, 21, 10));
+		this.iProductoService.insertarProducto(p5);
 		
-		this.iTransferenciaService.eliminar("13");
+		List<Producto> pro=new ArrayList<Producto>();
+		pro.add(p);
+		pro.add(p2);
+		pro.add(p3);
+		pro.add(p4);
+		pro.add(p5);
 		
-		System.out.println("\n Deposito \n");
+		Inventario i=new Inventario();
+		i.setBodega("123");
+		i.setProducto(pro);
 		
-		this.depositoService.realizarDeposito("14", new BigDecimal(50));
+		this.iInventarioService.insertar(i);
 		
-		this.depositoService.buscarDeposito("14");
+		System.out.println("\n    MEGA SANTA MARIA ");
+		System.out.println("\n  Reporte de Inventario ");
 		
-		this.depositoService.actualizarFechaDeposito(LocalDateTime.now());
+		System.out.println("\n Fecha 1: "+ LocalDateTime.of(2020, 2, 1, 12, 9, 21));
+		this.iGestorInventarioService.consultar(LocalDateTime.of(2020, 2, 1, 12, 10, 11));
 		
-		this.depositoService.eliminarDeposito("14");
-		
-		System.out.println("\n Retiro \n");
-		
-		this.iRetiroService.realizarRetiro("1234","23", new BigDecimal(100));
-		
-		this.iRetiroService.buscarPorId("1234");
-		
-		this.iRetiroService.actualizarCuentaRetiro("21");
-		
-		this.iRetiroService.eliminarRetiroDeFecha(LocalDateTime.of(2022, 4, 12, 16, 40));
+		System.out.println("\n Fecha 2: "+ LocalDateTime.of(2022, 1, 1, 12, 10, 11));
+		this.iGestorInventarioService.consultar(LocalDateTime.of(2022, 1, 1, 12, 10, 11));
 	}
 
 }
