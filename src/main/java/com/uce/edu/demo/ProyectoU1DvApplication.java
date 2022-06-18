@@ -1,7 +1,6 @@
 package com.uce.edu.demo;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -14,30 +13,24 @@ import com.uce.edu.demo.modelo.Matricula;
 import com.uce.edu.demo.modelo.ProfesorGeneral;
 import com.uce.edu.demo.modelo.ProfesorMateria;
 import com.uce.edu.demo.service.IMatriculaService;
-import com.uce.edu.demo.tienda.modelo.Empleado;
-import com.uce.edu.demo.tienda.modelo.Encargado;
-import com.uce.edu.demo.tienda.modelo.Propietario;
-import com.uce.edu.demo.tienda.modelo.Sucursal;
-import com.uce.edu.demo.tienda.modelo.Tienda;
-import com.uce.edu.demo.tienda.service.ITiendaService;
 
 @SpringBootApplication
 public class ProyectoU1DvApplication implements CommandLineRunner {
 	
 	@Autowired
-	private Encargado encargado;
+	private ProfesorGeneral general;
 	
 	@Autowired
-	private Encargado encargado1;
+	private ProfesorGeneral general1;
 	
 	@Autowired
-	private Empleado empleado;
+	private ProfesorMateria materia;
 	
 	@Autowired
-	private Empleado empleado1;
+	private ProfesorMateria materia1;
 	
 	@Autowired
-	private ITiendaService iTiendaService;
+	private IMatriculaService iMatriculaService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU1DvApplication.class, args);
@@ -47,53 +40,30 @@ public class ProyectoU1DvApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		
 		System.out.println("EJEMPLO SINGLETON");
-		this.encargado.setNombre("Domenica");
-		this.encargado.setApellido("Vizcarra");
-		System.out.println("Encargado  : "+this.encargado);
-		System.out.println("Encargado 1: "+this.encargado1);
-		
-		System.out.println("Modificando el apellido:");
-		this.encargado1.setApellido("Vasconez");
-		System.out.println("Encargado  : "+this.encargado);
-		System.out.println("Encargado 1: "+this.encargado1);
+		this.general.setNombre("Domenica");
+		this.general.setApellido("Vizcarra");
+		System.out.println(this.general);
+		System.out.println("---------");
+		System.out.println(this.general1);
+		this.general1.setNombre("Pepito");
+		System.out.println("---------");
+		System.out.println(this.general);
+		System.out.println("---------");
+		System.out.println(this.general1);
 		
 		System.out.println("EJEMPLO PROTOTYPE");
-		this.empleado.setNombre("Karina");
-		this.empleado.setApellido("Rea");
-		System.out.println("Empleado  : "+this.empleado);
-		System.out.println("Empleado 1: "+this.empleado1);
+		this.materia.setNombre("Daniel");
+		this.materia.setApellido("Teran");
+		System.out.println(this.materia);
+		System.out.println("---------");
+		System.out.println(this.materia1);
+		System.out.println("---------");
 		
-		System.out.println("Modificando el apellido:");
-		this.empleado1.setApellido("Caceres");
-		System.out.println("Empleado  : "+this.empleado);
-		System.out.println("Empleado 1: "+this.empleado1);
-		
-		Propietario p=new Propietario();
-		p.setNombre("Alison");
-		p.setApellido("Cabrera");
-		p.setCedula("124578");
-		
-		Sucursal s=new Sucursal();
-		s.setCiudad("Quito");
-		s.setDireccion("Villaflora N25-33");
-		s.setNombre("Sucursal Villaflora");
-		
-		Sucursal s2=new Sucursal();
-		s2.setCiudad("Quito");
-		s2.setDireccion("Cotocollao Oe36-22");
-		s2.setNombre("Sucursal Cotocollao");
-		
-		List<Sucursal> listaS=new ArrayList<>();
-		listaS.add(s);
-		listaS.add(s2);
-		
-		System.out.println("\n Ejemplo Tienda");
-		
-		Tienda tienda=new Tienda();
-		tienda.setNumero("1234");
-		tienda.setPropietario(p);
-		tienda.setSucursal(listaS);
-		this.iTiendaService.ingresar(tienda);
+		Matricula matricula1=new Matricula();
+		matricula1.setEstudiante(new Estudiante());
+		matricula1.setNumero("1234");
+		matricula1.setMateria(new ArrayList<Materia>());
+		this.iMatriculaService.ingresar(matricula1);
 	}
 
 }
